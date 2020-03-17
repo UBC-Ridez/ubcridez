@@ -1,0 +1,109 @@
+package model;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the address database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
+public class Address implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="address_id")
+	private Integer addressId;
+
+	private String city;
+
+	private String country;
+
+	private String prov;
+
+	@Column(name="street_no_name")
+	private String streetNoName;
+
+	private String zip;
+
+	//bi-directional many-to-one association to Member
+	@OneToMany(mappedBy="address")
+	private List<Member> members;
+
+	public Address() {
+	}
+
+	public Integer getAddressId() {
+		return this.addressId;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return this.country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getProv() {
+		return this.prov;
+	}
+
+	public void setProv(String prov) {
+		this.prov = prov;
+	}
+
+	public String getStreetNoName() {
+		return this.streetNoName;
+	}
+
+	public void setStreetNoName(String streetNoName) {
+		this.streetNoName = streetNoName;
+	}
+
+	public String getZip() {
+		return this.zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public List<Member> getMembers() {
+		return this.members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+	public Member addMember(Member member) {
+		getMembers().add(member);
+		member.setAddress(this);
+
+		return member;
+	}
+
+	public Member removeMember(Member member) {
+		getMembers().remove(member);
+		member.setAddress(null);
+
+		return member;
+	}
+
+}

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: UBC Ridez
+Implementation-Version: 1.0
+Built-By: batthp
+Implementation-Vendor-Id: org.springframework.boot
+Build-Jdk: 1.8.0_211
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/ubc-ridez
+Created-By: Maven Integration for Eclipse
+
