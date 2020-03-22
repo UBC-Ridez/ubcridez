@@ -1,8 +1,14 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -15,8 +21,8 @@ public class Vehicle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="vehicle_id")
-	private Integer vehicleId;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	private String make;
 
@@ -35,13 +41,15 @@ public class Vehicle implements Serializable {
 	public Vehicle() {
 	}
 
-	public Integer getVehicleId() {
-		return this.vehicleId;
-	}
+  public Integer getId()
+  {
+    return id;
+  }
 
-	public void setVehicleId(Integer vehicleId) {
-		this.vehicleId = vehicleId;
-	}
+  public void setId(Integer id)
+  {
+    this.id = id;
+  }
 
 	public String getMake() {
 		return this.make;

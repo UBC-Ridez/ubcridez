@@ -1,8 +1,18 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -15,19 +25,22 @@ public class Rider implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="rider_id")
-	private Integer riderId;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	//bi-directional many-to-one association to Ride
+	@JsonIgnore
 	@OneToMany(mappedBy="rider")
 	private List<Ride> rides;
 
 	//bi-directional many-to-one association to Member
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="member_id")
 	private Member member;
 
 	//bi-directional many-to-one association to Vehicle
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="vehicle_id")
 	private Vehicle vehicle;
@@ -35,13 +48,15 @@ public class Rider implements Serializable {
 	public Rider() {
 	}
 
-	public Integer getRiderId() {
-		return this.riderId;
-	}
+  public Integer getId()
+  {
+    return id;
+  }
 
-	public void setRiderId(Integer riderId) {
-		this.riderId = riderId;
-	}
+  public void setId(Integer id)
+  {
+    this.id = id;
+  }
 
 	public List<Ride> getRides() {
 		return this.rides;

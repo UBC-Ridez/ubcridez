@@ -1,7 +1,15 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -14,8 +22,8 @@ public class Insurance implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="insurance_id")
-	private Integer insuranceId;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	@Column(name="policy_number")
 	private String policyNumber;
@@ -30,14 +38,16 @@ public class Insurance implements Serializable {
 	public Insurance() {
 	}
 
-	public Integer getInsuranceId() {
-		return this.insuranceId;
-	}
+  public Integer getId()
+  {
+    return id;
+  }
 
-	public void setInsuranceId(Integer insuranceId) {
-		this.insuranceId = insuranceId;
-	}
-
+  public void setId(Integer id)
+  {
+    this.id = id;
+  }
+  
 	public String getPolicyNumber() {
 		return this.policyNumber;
 	}

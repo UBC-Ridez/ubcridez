@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -15,21 +18,23 @@ public class Ridee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ridee_id")
-	private Integer rideeId;
+	private Integer id;
 
 	@Column(name="is_minor")
 	private Boolean isMinor;
 
 	//bi-directional many-to-one association to Preference
+  @JsonIgnore
 	@OneToMany(mappedBy="ridee")
 	private List<Preference> preferences;
 
 	//bi-directional many-to-one association to Ride
+  @JsonIgnore
 	@OneToMany(mappedBy="ridee")
 	private List<Ride> rides;
 
 	//bi-directional many-to-one association to Member
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="member_id")
 	private Member member;
@@ -37,14 +42,16 @@ public class Ridee implements Serializable {
 	public Ridee() {
 	}
 
-	public Integer getRideeId() {
-		return this.rideeId;
-	}
+  public Integer getId()
+  {
+    return id;
+  }
 
-	public void setRideeId(Integer rideeId) {
-		this.rideeId = rideeId;
-	}
-
+  public void setId(Integer id)
+  {
+    this.id = id;
+  }
+  
 	public Boolean getIsMinor() {
 		return this.isMinor;
 	}

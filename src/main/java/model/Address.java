@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -15,8 +18,8 @@ public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="address_id")
-	private Integer addressId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	private String city;
 
@@ -30,21 +33,24 @@ public class Address implements Serializable {
 	private String zip;
 
 	//bi-directional many-to-one association to Member
+	@JsonIgnore
 	@OneToMany(mappedBy="address")
 	private List<Member> members;
 
 	public Address() {
 	}
 
-	public Integer getAddressId() {
-		return this.addressId;
-	}
+	public Integer getId()
+  {
+    return id;
+  }
 
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
-	}
+  public void setId(Integer id)
+  {
+    this.id = id;
+  }
 
-	public String getCity() {
+  public String getCity() {
 		return this.city;
 	}
 

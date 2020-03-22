@@ -1,8 +1,18 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -15,8 +25,8 @@ public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="member_id")
-	private Integer memberId;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	private Integer age;
 
@@ -27,33 +37,39 @@ public class Member implements Serializable {
 	private String status;
 
 	//bi-directional many-to-one association to Feedback
+	@JsonIgnore
 	@OneToMany(mappedBy="member")
 	private List<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Address
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
 
 	//bi-directional many-to-one association to Ridee
+  @JsonIgnore
 	@OneToMany(mappedBy="member")
 	private List<Ridee> ridees;
 
 	//bi-directional many-to-one association to Rider
+  @JsonIgnore
 	@OneToMany(mappedBy="member")
 	private List<Rider> riders;
 
 	public Member() {
 	}
 
-	public Integer getMemberId() {
-		return this.memberId;
-	}
+  public Integer getId()
+  {
+    return id;
+  }
 
-	public void setMemberId(Integer memberId) {
-		this.memberId = memberId;
-	}
-
+  public void setId(Integer id)
+  {
+    this.id = id;
+  }
+  
 	public Integer getAge() {
 		return this.age;
 	}

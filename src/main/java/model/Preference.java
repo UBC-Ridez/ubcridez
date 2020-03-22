@@ -1,7 +1,17 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -15,14 +25,15 @@ public class Preference implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="preference_id")
-	private Integer preferenceId;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	private String description;
 
 	private String favourites;
 
 	//bi-directional many-to-one association to Ridee
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ridee_id")
 	private Ridee ridee;
@@ -30,13 +41,15 @@ public class Preference implements Serializable {
 	public Preference() {
 	}
 
-	public Integer getPreferenceId() {
-		return this.preferenceId;
-	}
+  public Integer getId()
+  {
+    return id;
+  }
 
-	public void setPreferenceId(Integer preferenceId) {
-		this.preferenceId = preferenceId;
-	}
+  public void setId(Integer id)
+  {
+    this.id = id;
+  }
 
 	public String getDescription() {
 		return this.description;
