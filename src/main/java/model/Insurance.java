@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 /**
  * The persistent class for the insurance database table.
@@ -31,6 +33,7 @@ public class Insurance implements Serializable {
 	private String provider;
 
 	//bi-directional many-to-one association to Vehicle
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="vehicle_id")
 	private Vehicle vehicle;

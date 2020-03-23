@@ -13,7 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -44,18 +45,18 @@ public class Ride implements Serializable {
 	private String notes;
 
 	//bi-directional many-to-one association to Feedback
-  @JsonIgnore
+  @JsonBackReference
 	@OneToMany(mappedBy="ride")
 	private List<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Ridee
-  @JsonIgnore
+  @JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="ridee_id")
 	private Ridee ridee;
 
 	//bi-directional many-to-one association to Rider
-  @JsonIgnore
+  @JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="rider_id")
 	private Rider rider;
