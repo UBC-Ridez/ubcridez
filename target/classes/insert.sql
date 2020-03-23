@@ -1,7 +1,7 @@
 -- SCHEMA: public
 -- Used for creating fake data.
 
-INSERT INTO Insurance VALUES (1, 'C1', 'Tesla Insurance', 1), (2, 'S1', 'Intact', 1), (3, 'T1', 'RBC Insurance', 1),
+INSERT INTO Insurance (id, policy_number, provider, vehicle_id) VALUES (1, 'C1', 'Tesla Insurance', 1), (2, 'S1', 'Intact', 1), (3, 'T1', 'RBC Insurance', 1),
 (4, 'X1', 'American Insurance', 1), (5, 'Y1', 'Tesla Insurance', 1);
 
 INSERT INTO Address (id, city, prov, country, zip, street_no_name) VALUES (1, 'Vancouver', 'British Columbia', 'Canada', 'V6R 2G9', '3981 W 12th Ave'), (2, 'Toronto', 'Ontario', 'Canada', 'T6R 2G9', '39 W 10th Ave'), 
