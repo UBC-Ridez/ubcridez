@@ -2,6 +2,9 @@ package rest;
 
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,10 @@ import repo.RideeRepository;
 public class RideeRestController
 {
 
+
+  @PersistenceUnit
+  private EntityManagerFactory entityManagerFactory;
+  
   @Autowired
   private RideeRepository rideeRepository;
 
@@ -41,24 +48,33 @@ public class RideeRestController
   @RequestMapping(value = "/ridee", method = RequestMethod.POST, consumes = "application/json")
   public ResponseEntity<String> saveAddess(@RequestBody Ridee ridee)
   {
-    rideeRepository.save(ridee);
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
+    try
+    {
+      rideeRepository.save(ridee);
+    } catch (Exception e)
+    {
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
+    }
+    return new ResponseEntity<String>(result, status);
   }
 
   @RequestMapping(value = "/ridee/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<String> deleteAddress(
       @PathVariable(value = "id") Integer id)
   {
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
     try
     {
       rideeRepository.deleteById(id);
-
     } catch (Exception e)
     {
-      return new ResponseEntity<String>("FAILURE",
-          HttpStatus.EXPECTATION_FAILED);
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
     }
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    return new ResponseEntity<String>(result, status);
   }
-
 }
