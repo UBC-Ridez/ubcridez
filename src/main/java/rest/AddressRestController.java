@@ -48,23 +48,34 @@ public class AddressRestController
   @RequestMapping(value = "/address", method = RequestMethod.POST, consumes = "application/json")
   public ResponseEntity<String> saveAddess(@RequestBody Address address)
   {
-    addressRepository.save(address);
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
+    try
+    {
+      addressRepository.save(address);
+    } catch (Exception e)
+    {
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
+    }
+    return new ResponseEntity<String>(result, status);
   }
-  
+
   @RequestMapping(value = "/address/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<String> deleteAddress(@PathVariable(value = "id") Integer id)
+  public ResponseEntity<String> deleteAddress(
+      @PathVariable(value = "id") Integer id)
   {
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
     try
     {
       addressRepository.deleteById(id);
-
     } catch (Exception e)
     {
-      return new ResponseEntity<String>("FAILURE",
-          HttpStatus.EXPECTATION_FAILED);
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
     }
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    return new ResponseEntity<String>(result, status);
   }
 
 }

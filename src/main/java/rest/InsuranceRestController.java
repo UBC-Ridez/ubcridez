@@ -41,24 +41,35 @@ public class InsuranceRestController
   @RequestMapping(value = "/insurance", method = RequestMethod.POST, consumes = "application/json")
   public ResponseEntity<String> saveAddess(@RequestBody Insurance insurance)
   {
-    insuranceRepository.save(insurance);
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
+    try
+    {
+      insuranceRepository.save(insurance);
+    } catch (Exception e)
+    {
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
+    }
+    return new ResponseEntity<String>(result, status);
   }
 
   @RequestMapping(value = "/insurance/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<String> deleteAddress(
       @PathVariable(value = "id") Integer id)
   {
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
     try
     {
       insuranceRepository.deleteById(id);
 
     } catch (Exception e)
     {
-      return new ResponseEntity<String>("FAILURE",
-          HttpStatus.EXPECTATION_FAILED);
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
     }
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    return new ResponseEntity<String>(result, status);
   }
 
 }

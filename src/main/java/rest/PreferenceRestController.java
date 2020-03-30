@@ -41,24 +41,34 @@ public class PreferenceRestController
   @RequestMapping(value = "/preference", method = RequestMethod.POST, consumes = "application/json")
   public ResponseEntity<String> saveAddess(@RequestBody Preference preference)
   {
-    preferenceRepository.save(preference);
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
+    try
+    {
+      preferenceRepository.save(preference);
+    } catch (Exception e)
+    {
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
+    }
+    return new ResponseEntity<String>(result, status);
   }
 
   @RequestMapping(value = "/preference/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<String> deleteAddress(
       @PathVariable(value = "id") Integer id)
   {
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
     try
     {
       preferenceRepository.deleteById(id);
-
     } catch (Exception e)
     {
-      return new ResponseEntity<String>("FAILURE",
-          HttpStatus.EXPECTATION_FAILED);
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
     }
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    return new ResponseEntity<String>(result, status);
   }
 
 }
