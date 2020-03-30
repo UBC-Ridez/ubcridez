@@ -12,9 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 /**
@@ -39,18 +37,18 @@ public class Member implements Serializable {
 	private String status;
 
 	//bi-directional many-to-one association to Feedback
-	@JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="member")
 	private List<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Address
-	@JsonManagedReference
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
 
 	//bi-directional many-to-one association to Ridee
-  @JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="member")
 	private List<Ridee> ridees;
 

@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -39,7 +39,7 @@ public class Address implements Serializable {
 	private String zip;
 
 	//bi-directional many-to-one association to Member
-	@JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="address")
 	private List<Member> members;
 

@@ -12,8 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -30,18 +29,18 @@ public class Rider implements Serializable {
 	private Integer id;
 
 	//bi-directional many-to-one association to Ride
-	@JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="rider")
 	private List<Ride> rides;
 
 	//bi-directional many-to-one association to Member
-	@JsonBackReference
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="member_id")
 	private Member member;
 
 	//bi-directional many-to-one association to Vehicle
-	@JsonManagedReference
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="vehicle_id")
 	private Vehicle vehicle;

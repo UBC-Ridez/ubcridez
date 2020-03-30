@@ -11,8 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -31,17 +30,17 @@ public class Ridee implements Serializable {
 	private Boolean isMinor;
 
 	//bi-directional many-to-one association to Preference
-	@JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="ridee")
 	private List<Preference> preferences;
 
 	//bi-directional many-to-one association to Ride
-	@JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="ridee")
 	private List<Ride> rides;
 
 	//bi-directional many-to-one association to Member
-  @JsonManagedReference
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="member_id")
 	private Member member;

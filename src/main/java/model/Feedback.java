@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -33,13 +33,13 @@ public class Feedback implements Serializable {
 	private String feedbackType;
 
 	//bi-directional many-to-one association to Member
-	@JsonManagedReference
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="member_id")
 	private Member member;
 
 	//bi-directional many-to-one association to Ride
-	@JsonManagedReference
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ride_id")
 	private Ride ride;

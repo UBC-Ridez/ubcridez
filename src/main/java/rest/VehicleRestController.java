@@ -41,24 +41,35 @@ public class VehicleRestController
   @RequestMapping(value = "/vehicle", method = RequestMethod.POST, consumes = "application/json")
   public ResponseEntity<String> saveAddess(@RequestBody Vehicle vehicle)
   {
-    vehicleRepository.save(vehicle);
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
+    try
+    {
+      vehicleRepository.save(vehicle);
+    } catch (Exception e)
+    {
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
+    }
+    return new ResponseEntity<String>(result, status);
   }
 
   @RequestMapping(value = "/vehicle/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<String> deleteAddress(
       @PathVariable(value = "id") Integer id)
   {
+    String result = "SUCCESS";
+    HttpStatus status = HttpStatus.OK;
     try
     {
       vehicleRepository.deleteById(id);
 
     } catch (Exception e)
     {
-      return new ResponseEntity<String>("FAILURE",
-          HttpStatus.EXPECTATION_FAILED);
+      result = "FAILURE";
+      status = HttpStatus.EXPECTATION_FAILED;
     }
-    return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+    return new ResponseEntity<String>(result, status);
   }
 
 }

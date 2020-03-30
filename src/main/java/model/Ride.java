@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -34,23 +34,23 @@ public class Ride implements Serializable {
 	private String arrivalLocation;
 
 	@Column(name="arrival_time")
-	private String arrivalTime;
+	private Long arrivalTime;
 
 	@Column(name="departure_location")
 	private String departureLocation;
 
 	@Column(name="departure_time")
-	private String departureTime;
+	private Long departureTime;
 
 	private String notes;
 
 	//bi-directional many-to-one association to Feedback
-  @JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="ride")
 	private List<Feedback> feedbacks;
 
 	//bi-directional many-to-one association to Ridee
-  @JsonManagedReference
+  @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ridee_id")
 	private Ridee ridee;
@@ -82,11 +82,11 @@ public class Ride implements Serializable {
 		this.arrivalLocation = arrivalLocation;
 	}
 
-	public String getArrivalTime() {
+	public Long getArrivalTime() {
 		return this.arrivalTime;
 	}
 
-	public void setArrivalTime(String arrivalTime) {
+	public void setArrivalTime(Long arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
@@ -98,11 +98,11 @@ public class Ride implements Serializable {
 		this.departureLocation = departureLocation;
 	}
 
-	public String getDepartureTime() {
+	public Long getDepartureTime() {
 		return this.departureTime;
 	}
 
-	public void setDepartureTime(String departureTime) {
+	public void setDepartureTime(Long departureTime) {
 		this.departureTime = departureTime;
 	}
 

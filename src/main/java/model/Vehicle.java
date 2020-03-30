@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -33,12 +33,12 @@ public class Vehicle implements Serializable {
 	private Integer year;
 
 	//bi-directional many-to-one association to Insurance
-  @JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="vehicle")
 	private List<Insurance> insurances;
 
 	//bi-directional many-to-one association to Rider
-  @JsonBackReference
+  @JsonIgnore
 	@OneToMany(mappedBy="vehicle")
 	private List<Rider> riders;
 

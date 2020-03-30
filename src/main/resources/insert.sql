@@ -1,6 +1,9 @@
 -- SCHEMA: public
 -- Used for creating fake data.
 
+INSERT INTO Vehicle (id, year, make, model) VALUES (1, 2020, 'Tesla', 'Cybertruck'), (2, 2019, 'Tesla', 'Model S'), 
+(3, 2019, 'Tesla', 'Model 3'), (4, 2018, 'Tesla', 'Model X'), (5, 2017, 'Tesla', 'Model Y');
+
 INSERT INTO Insurance (id, policy_number, provider, vehicle_id) VALUES (1, 'C1', 'Tesla Insurance', 1), (2, 'S1', 'Intact', 1), (3, 'T1', 'RBC Insurance', 1),
 (4, 'X1', 'American Insurance', 1), (5, 'Y1', 'Tesla Insurance', 1);
 
@@ -20,10 +23,13 @@ INSERT INTO Preferences (id, description, favourites, ridee_id) VALUES (1, 'Clea
 
 INSERT INTO Rider (id, member_id, vehicle_id) VALUES (1, 1, 1), (2, 2, 2), (3, 6, 3), (4, 4, 4), (5, 7, 5);
 
-INSERT INTO Ride (id, notes, arrival_time, departure_time, arrival_location, departure_location, rider_id, ridee_id) VALUES (1, NULL, '2018-11-11 8:59 PM' , '2018-11-11 6:59 PM', 'Vancouver', 'Toronto', 2, 1), (2, 'Stopped at McDonalds on Highway 1', '2019-09-11 1:59 PM' , '2019-09-11 10:59 PM', 'Toronto', 'Edmenton', 3, 2),
- (3, NULL, '2019-04-04 1:00 PM' , '2019-04-04 5:24 PM', 'Montreal', 'Toronto', 2, 4),  (4, NULL, '2019-01-12 4:00 AM' , '2019-01-12 8:24 PM', 'Montreal', 'Nova Scotia', 5, 5)
-,  (5, 'Encountered an accident at Bloor and Yonge', '2020-02-12 4:00 AM' , '2020-02-12 8:24 PM', 'Vancouver', 'Burnaby', 4, 3), 
- (6, 'Safe Travels', '2020-02-22 4:00 AM' , '2019-02-22 8:24 PM', 'Vancouver', 'Vancouver', 1, 3);
+INSERT INTO Ride (id, notes, arrival_time, departure_time, arrival_location, departure_location, rider_id, ridee_id) VALUES
+(1, NULL, 1541987957000 , 1541980757000, 'Vancouver', 'Toronto', 2, 1), 
+(2, 'Stopped at McDonalds on Highway 1', 1568224757000 , 1568257157000, 'Toronto', 'Edmenton', 3, 2),
+(3, NULL, 1554397217000 , 1554413057000, 'Montreal', 'Toronto', 2, 4),
+(4, NULL, 1547283617000 , 1547342657000, 'Montreal', 'Nova Scotia', 5, 5),
+(5, 'Encountered an accident at Bloor and Yonge', 1581498017000 , 1581557057000, 'Vancouver', 'Burnaby', 4, 3), 
+(6, 'Safe Travels', 1582362017000, 1582421057000, 'Vancouver', 'Vancouver', 1, 3);
  
 INSERT INTO Feedback (id, feedback, feedback_type, ride_id, member_id) VALUES (1, 'The drive was really awesome.', 'REGULAR', 1, 1), (2, 'The ride was really comfortable.', 'REGULAR', 1, 2)
 , (3, 'The ride was a bit bumpy.', 'COMPLAINT', 2, 2) , (4, 'Veronica is a really impressive driver. HATS OFF.', 'REGULAR', 3, 5) 
