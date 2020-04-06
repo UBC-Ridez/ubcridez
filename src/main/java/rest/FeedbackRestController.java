@@ -1,6 +1,7 @@
 package rest;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import model.Feedback;
 import repo.FeedbackRepository;
+import repo.MemberRepository;
+import repo.RideRepository;
 
 @CrossOrigin
 @RestController
@@ -23,6 +26,11 @@ public class FeedbackRestController
 
   @Autowired
   private FeedbackRepository feedbackRepository;
+  
+  @Autowired
+  private MemberRepository memberRepository;
+  @Autowired
+  private RideRepository rideRepository;
 
   @RequestMapping(value = "/feedback", method = RequestMethod.GET)
   @ResponseBody
@@ -38,13 +46,19 @@ public class FeedbackRestController
     return (Feedback) feedbackRepository.findById(id).get();
   }
 
+  //NON hibernate way
   @RequestMapping(value = "/feedback", method = RequestMethod.POST, consumes = "application/json")
-  public ResponseEntity<String> saveAddess(@RequestBody Feedback feedback)
+  public ResponseEntity<String> saveAddess(@RequestBody Map<String, String> feedbackMap)
   {
     String result = "SUCCESS";
     HttpStatus status = HttpStatus.OK;
     try
     {
+      Feedback feedback = feedbackRepository.findById(Integer.parseInt(feedbackMap.get("id"))).get();
+      feedback.setFeedback(feedbackMap.get("feedback"));
+      feedback.setFeedbackType(feedbackMap.get("feedbackType"));
+      feedback.setMember(memberRepository.findById(Integer.parseInt(feedbackMap.get("memberId"))).get());
+      feedback.setRide(rideRepository.findById(Integer.parseInt(feedbackMap.get("rideId"))).get());
       feedbackRepository.save(feedback);
     } catch (Exception e)
     {
