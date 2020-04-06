@@ -29,7 +29,12 @@ INSERT INTO Ride (id, notes, arrival_time, departure_time, arrival_location, dep
 (3, NULL, 1554397217000 , 1554413057000, 'Montreal', 'Toronto', 2, 4),
 (4, NULL, 1547283617000 , 1547342657000, 'Montreal', 'Nova Scotia', 5, 5),
 (5, 'Encountered an accident at Bloor and Yonge', 1581498017000 , 1581557057000, 'Vancouver', 'Burnaby', 4, 3), 
-(6, 'Safe Travels', 1582362017000, 1582421057000, 'Vancouver', 'Vancouver', 1, 3);
+(6, 'Divison Travels Diary 1', 1582362017000, 1582421057000, 'Vancouver', 'Vancouver', 1, 3),
+(7, 'Divison Travels Diary 2', 1582362017000, 1582421057000, 'Vancouver', 'Vancouver', 2, 2),
+(8, 'Divison Travels Diary 3', 1582362017000, 1582421057000, 'Vancouver', 'Vancouver', 3, 2),
+(9, 'Divison Travels Diary 4', 1582362017000, 1582421057000, 'Vancouver', 'Vancouver', 5, 2);
+
+;
  
 INSERT INTO Feedback (id, feedback, feedback_type, ride_id, member_id) VALUES (1, 'The drive was really awesome.', 'REGULAR', 1, 1), (2, 'The ride was really comfortable.', 'REGULAR', 1, 2)
 , (3, 'The ride was a bit bumpy.', 'COMPLAINT', 2, 2) , (4, 'Veronica is a really impressive driver. HATS OFF.', 'REGULAR', 3, 5) 

@@ -16,7 +16,7 @@ import repo.AddressRepository;
 @EntityScan(
 { "model" })
 @ComponentScan(
-{ "service", "service.impl", "rest" })
+{ "service", "service.impl", "rest", "config" })
 @EnableJpaRepositories("repo")
 public class StartApplication implements CommandLineRunner
 {
